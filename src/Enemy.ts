@@ -19,4 +19,12 @@ export default class Enemy extends BouncingBall {
     draw() {
         this.drawCircle(this.x, this.y, this.radius, this.color);
     }
+
+    updateState(screenWidth: any, screenHeight: any) {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        this.draw();
+        this.checkOutOfScreen(screenWidth, screenHeight);
+    }
 }

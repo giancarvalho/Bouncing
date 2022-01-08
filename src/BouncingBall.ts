@@ -26,7 +26,7 @@ export default abstract class BouncingBall extends Circle {
 
     abstract draw(): any;
 
-    checkEnemyOutOfScreen(screenWidth: any, screenHeight: any) {
+    checkOutOfScreen(screenWidth: any, screenHeight: any) {
         if (this.x > screenWidth || this.x < 0) {
             this.speedX *= -1;
         }

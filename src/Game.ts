@@ -69,11 +69,7 @@ export default class Game {
 
     handleEnemy() {
         this.enemies.map((enemy) => {
-            enemy.x += enemy.speedX;
-            enemy.y += enemy.speedY;
-
-            enemy.draw();
-            enemy.checkEnemyOutOfScreen(this.screenWidth, this.screenHeight);
+            enemy.updateState(this.screenWidth, this.screenHeight);
             this.checkColision(enemy);
         });
     }
