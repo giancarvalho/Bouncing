@@ -1,5 +1,7 @@
 import BouncingBall from "./BouncingBall";
+import Game from "./Game";
 import Ball from "./interfaces/Ball";
+import Player from "./Player";
 
 export default class Enemy extends BouncingBall {
     constructor(
@@ -20,11 +22,27 @@ export default class Enemy extends BouncingBall {
         this.drawCircle(this.x, this.y, this.radius, this.color);
     }
 
-    updateState(screenWidth: any, screenHeight: any) {
+    updateState(
+        screenWidth: any,
+        screenHeight: any,
+        player: Player,
+        game: Game
+    ) {
         this.x += this.speedX;
         this.y += this.speedY;
 
         this.draw();
         this.checkOutOfScreen(screenWidth, screenHeight);
+        this.checkColision(player, game);
+    }
+
+    checkColision(player: Player, game: Game) {
+        const dist = Math.sqrt(
+            (player.x - this.x) ** 2 + (player.y - this.y) ** 2
+        );
+
+        if (dist <= player.radius + this.radius) {
+            game.endGame();
+        }
     }
 }

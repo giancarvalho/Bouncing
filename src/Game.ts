@@ -67,10 +67,14 @@ export default class Game {
         this.player.y = event.clientY;
     }
 
-    handleEnemy() {
+    update() {
         this.enemies.map((enemy) => {
-            enemy.updateState(this.screenWidth, this.screenHeight);
-            this.checkColision(enemy);
+            enemy.updateState(
+                this.screenWidth,
+                this.screenHeight,
+                this.player,
+                this
+            );
         });
     }
 
@@ -84,15 +88,6 @@ export default class Game {
     //         this.checkColision(friend);
     // //     });
     // }
-
-    checkColision(enemy: Enemy) {
-        const dist = Math.sqrt(
-            (this.player.x - enemy.x) ** 2 + (this.player.y - enemy.y) ** 2
-        );
-        if (dist <= this.player.radius + enemy.radius) {
-            this.endGame();
-        }
-    }
 
     increaseDificulty() {
         this.score += 10;
@@ -146,7 +141,7 @@ export default class Game {
     gameLoop() {
         this.clearScreen();
         this.player.draw();
-        this.handleEnemy();
+        this.update();
         // this.handleFriend();
     }
 
