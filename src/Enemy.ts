@@ -22,26 +22,21 @@ export default class Enemy extends BouncingBall {
         this.drawCircle(this.x, this.y, this.radius, this.color);
     }
 
-    updateState(
-        screenWidth: any,
-        screenHeight: any,
-        player: Player,
-        game: Game
-    ) {
+    updateState(screenWidth: any, screenHeight: any, game: Game) {
         this.x += this.speedX;
         this.y += this.speedY;
 
         this.draw();
         this.checkOutOfScreen(screenWidth, screenHeight);
-        this.checkColision(player, game);
+        this.checkColision(game);
     }
 
-    checkColision(player: Player, game: Game) {
+    checkColision(game: Game) {
         const dist = Math.sqrt(
-            (player.x - this.x) ** 2 + (player.y - this.y) ** 2
+            (game.player.x - this.x) ** 2 + (game.player.y - this.y) ** 2
         );
 
-        if (dist <= player.radius + this.radius) {
+        if (dist <= game.player.radius + this.radius) {
             game.endGame();
         }
     }

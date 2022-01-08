@@ -1,3 +1,4 @@
+import Circle from "./Circle";
 import Enemy from "./Enemy";
 
 import Player from "./Player";
@@ -7,7 +8,7 @@ export default class Game {
     screenHeight: any;
     canvas: HTMLCanvasElement;
     player: Player;
-    enemies: Enemy[];
+    circles: Circle[];
 
     context: CanvasRenderingContext2D;
     window: any;
@@ -24,9 +25,6 @@ export default class Game {
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
         this.canvas = canvas;
-        this.player;
-        this.enemies;
-        this.context;
         this.window = window;
         this.score = 0;
         this.fps = 1000 / 60;
@@ -44,12 +42,12 @@ export default class Game {
             "red",
             this.context
         );
-        this.enemies = [
+        this.circles = [
+            this.player,
             new Enemy(0, 0, 10, "green", 15, 15, this.context),
             new Enemy(10, 10, 10, "green", 5, 5, this.context),
             new Enemy(20, 20, 10, "green", 10, 10, this.context),
         ];
-        // this.friends = [];
     }
 
     configCanvas() {
@@ -63,18 +61,12 @@ export default class Game {
     }
 
     moveMouse(event: { clientX: number; clientY: number }) {
-        this.player.x = event.clientX;
-        this.player.y = event.clientY;
+        this.player.move(event);
     }
 
     update() {
-        this.enemies.map((enemy) => {
-            enemy.updateState(
-                this.screenWidth,
-                this.screenHeight,
-                this.player,
-                this
-            );
+        this.circles.map((circle) => {
+            circle.updateState(this.screenWidth, this.screenHeight, this);
         });
     }
 
@@ -91,7 +83,7 @@ export default class Game {
 
     increaseDificulty() {
         this.score += 10;
-        this.enemies.push(
+        this.circles.push(
             new Enemy(
                 this.screenWidth * Math.random(),
                 0,
@@ -133,14 +125,13 @@ export default class Game {
         alert(`Voce fez ${this.score} pontos`);
         this.clearScreen();
         clearInterval(this.intervalId);
-        this.enemies = [];
+        this.circles = [];
 
         this.window.location.reload();
     }
 
     gameLoop() {
         this.clearScreen();
-        this.player.draw();
         this.update();
         // this.handleFriend();
     }

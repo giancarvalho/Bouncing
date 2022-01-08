@@ -1,4 +1,6 @@
+import Game from "./Game";
 import iBall from "./interfaces/Ball";
+import Player from "./Player";
 
 export default abstract class Circle {
     x: number;
@@ -21,4 +23,6 @@ export default abstract class Circle {
         this.context.arc(x, y, radius, 0, 2 * Math.PI);
         this.context.fill();
     }
+
+    abstract updateState(x: number, y: number, game: Game): void;
 }
