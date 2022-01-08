@@ -1,6 +1,6 @@
 import Circle from "./Circle";
 import Enemy from "./Enemy";
-
+import Friend from "./Friend";
 import Player from "./Player";
 
 export default class Game {
@@ -28,7 +28,6 @@ export default class Game {
         this.window = window;
         this.score = 0;
         this.fps = 1000 / 60;
-        this.intervalId;
 
         this.configCanvas();
         this.configPlayers();
@@ -70,6 +69,10 @@ export default class Game {
         });
     }
 
+    deleteCircle(id: string) {
+        this.circles = this.circles.filter((circle) => circle.id !== id);
+    }
+
     // handleFriend() {
     //     this.friends.map((friend) => {
     //         friend.x += friend.speedX;
@@ -97,19 +100,19 @@ export default class Game {
         this.player.increaseSize();
     }
 
-    // addFriend() {
-    //     this.friends.push(
-    //         new Friend(
-    //             this.screenWidth * Math.random(),
-    //             0,
-    //             10,
-    //             "blue",
-    //             5,
-    //             5,
-    //             this.context
-    //         )
-    //     );
-    // }
+    addFriend() {
+        this.circles.push(
+            new Friend(
+                this.screenWidth * Math.random(),
+                0,
+                10,
+                "blue",
+                5,
+                5,
+                this.context
+            )
+        );
+    }
 
     turn() {
         let nTurn = 0;
@@ -117,7 +120,7 @@ export default class Game {
             nTurn++;
             this.increaseDificulty();
 
-            // if (nTurn % 2 === 0) this.addFriend();
+            if (nTurn % 2 === 0) this.addFriend();
         }, 2000);
     }
 
@@ -133,7 +136,6 @@ export default class Game {
     gameLoop() {
         this.clearScreen();
         this.update();
-        // this.handleFriend();
     }
 
     start() {

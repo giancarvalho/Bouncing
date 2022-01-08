@@ -1,51 +1,45 @@
-// import Circle from "./Circle";
+import iBouncingBall from "./BouncingBall";
+import Game from "./Game";
 
-// export default class Friend {
-//     x: number;
-//     y: number;
-//     radius: number;
-//     color: string;
-//     speedX: number;
-//     speedY: number;
-//     circle: Circle;
-//     context: any;
+export default class Friend extends iBouncingBall {
+    constructor(
+        x: number,
+        y: number,
+        radius: number,
+        color: string,
+        speedX: number,
+        speedY: number,
+        context: any
+    ) {
+        super({ x, y, radius, color, speedX, speedY, context });
+        this.x = x;
+        this.y = y;
+        this.radius = radius;
+        this.color = color;
+        this.speedX = speedX;
+        this.speedY = speedY;
+        this.context = context;
+    }
+    updateState(screenWidth: any, screenHeight: any, game: Game) {
+        this.x += this.speedX;
+        this.y += this.speedY;
 
-//     constructor(
-//         x: number,
-//         y: number,
-//         radius: number,
-//         color: string,
-//         speedX: number,
-//         speedY: number,
-//         context: any
-//     ) {
-//         this.x = x;
-//         this.y = y;
-//         this.radius = radius;
-//         this.color = color;
-//         this.speedX = speedX;
-//         this.speedY = speedY;
-//         this.context = context;
+        this.draw();
+        this.checkOutOfScreen(screenWidth, screenHeight);
+        this.checkColision(game);
+    }
 
-//         this.circle = new Circle(
-//             this.x,
-//             this.y,
-//             this.radius,
-//             this.color,
-//             this.context
-//         );
-//     }
+    draw() {
+        this.drawCircle(this.x, this.y, this.radius, this.color);
+    }
 
-//     draw(x: number, y: number) {
-//         this.circle.draw(x, y, this.radius, this.color);
-//     }
+    checkColision(game: Game) {
+        const dist = Math.sqrt(
+            (game.player.x - this.x) ** 2 + (game.player.y - this.y) ** 2
+        );
 
-//     checkEnemyOutOfScreen(screenWidth: any, screenHeight: any) {
-//         if (this.x > screenWidth || this.x < 0) {
-//             this.speedX *= -1;
-//         }
-//         if (this.y > screenHeight || this.y < 0) {
-//             this.speedY *= -1;
-//         }
-//     }
-// }
+        if (dist <= game.player.radius + this.radius) {
+            game.deleteCircle(this.id);
+        }
+    }
+}
