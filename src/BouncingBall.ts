@@ -28,10 +28,10 @@ export default abstract class BouncingBall extends Circle {
     abstract draw(): any;
 
     checkOutOfScreen(screenWidth: any, screenHeight: any) {
-        if (this.x > screenWidth || this.x < 0) {
+        if (this.x + this.radius > screenWidth || this.x + this.radius < 0) {
             this.speedX *= -1;
         }
-        if (this.y > screenHeight || this.y < 0) {
+        if (this.y + this.radius > screenHeight || this.y + this.radius < 0) {
             this.speedY *= -1;
         }
     }

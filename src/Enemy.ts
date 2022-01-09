@@ -37,7 +37,11 @@ export default class Enemy extends BouncingBall {
         );
 
         if (dist <= game.player.radius + this.radius) {
-            game.endGame();
+            if (game.player.isVunerable) game.endGame();
+            else {
+                game.deleteCircle(this.id);
+                game.player.decreaseSize();
+            }
         }
     }
 }

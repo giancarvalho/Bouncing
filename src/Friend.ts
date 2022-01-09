@@ -1,5 +1,6 @@
 import iBouncingBall from "./BouncingBall";
 import Game from "./Game";
+import PinkShape from "./PinkShape";
 
 export default class Friend extends iBouncingBall {
     constructor(
@@ -39,7 +40,11 @@ export default class Friend extends iBouncingBall {
         );
 
         if (dist <= game.player.radius + this.radius) {
+            game.player.changeShape(PinkShape);
             game.deleteCircle(this.id);
+            setTimeout(() => {
+                game.player.returnToNormal();
+            }, 3000);
         }
     }
 }

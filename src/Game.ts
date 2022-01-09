@@ -38,11 +38,9 @@ export default class Game {
             this.screenWidth / 2,
             this.screenHeight / 2,
             20,
-            "red",
             this.context
         );
         this.circles = [
-            this.player,
             new Enemy(0, 0, 10, "green", 15, 15, this.context),
             new Enemy(10, 10, 10, "green", 5, 5, this.context),
             new Enemy(20, 20, 10, "green", 10, 10, this.context),
@@ -73,17 +71,6 @@ export default class Game {
         this.circles = this.circles.filter((circle) => circle.id !== id);
     }
 
-    // handleFriend() {
-    //     this.friends.map((friend) => {
-    //         friend.x += friend.speedX;
-    //         friend.y += friend.speedY;
-
-    //         friend.draw(friend.x, friend.y);
-    //         friend.checkEnemyOutOfScreen(this.screenWidth, this.screenHeight);
-    //         this.checkColision(friend);
-    // //     });
-    // }
-
     increaseDificulty() {
         this.score += 10;
         this.circles.push(
@@ -92,21 +79,21 @@ export default class Game {
                 0,
                 10,
                 "green",
-                5,
-                5,
+                13 * Math.random(),
+                13 * Math.random(),
                 this.context
             )
         );
         this.player.increaseSize();
     }
 
-    addFriend() {
+    addFriend(friendsAdded: number[]) {
         this.circles.push(
             new Friend(
                 this.screenWidth * Math.random(),
                 0,
                 10,
-                "blue",
+                "pink",
                 5,
                 5,
                 this.context
@@ -116,11 +103,12 @@ export default class Game {
 
     turn() {
         let nTurn = 0;
+        let friendsAdded: number[] = [];
         setInterval(() => {
             nTurn++;
             this.increaseDificulty();
 
-            if (nTurn % 2 === 0) this.addFriend();
+            if (nTurn % 5 === 0) this.addFriend(friendsAdded);
         }, 2000);
     }
 
@@ -135,6 +123,7 @@ export default class Game {
 
     gameLoop() {
         this.clearScreen();
+        this.player.updateState();
         this.update();
     }
 
