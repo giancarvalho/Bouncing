@@ -6,17 +6,24 @@ const modal = document.querySelector("#modal");
 const screenWidth = window.innerWidth;
 const screenHeight = window.innerHeight;
 
-const game = new Game(screenWidth, screenHeight, canvas, window);
+let game = new Game(screenWidth, screenHeight, canvas, window, end);
 
 canvas.addEventListener("mousemove", (event) => {
     game.moveMouse(event);
 });
 
-function start() {
-    modal.classList.add("hidden");
-    game.start();
-    console.log("im here");
+function end() {
+    game = new Game(screenWidth, screenHeight, canvas, window, end);
+    toggleModal();
 }
 
-console.log(modal);
+function start() {
+    game.start();
+    toggleModal();
+}
+
+function toggleModal() {
+    modal.classList.toggle("hidden");
+}
+
 modal.addEventListener("click", start);

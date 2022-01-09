@@ -9,6 +9,7 @@ export default class Game {
     canvas: HTMLCanvasElement;
     player: Player;
     circles: Circle[];
+    end: Function;
 
     context: CanvasRenderingContext2D;
     window: any;
@@ -20,7 +21,8 @@ export default class Game {
         screenWidth: any,
         screenHeight: any,
         canvas: HTMLCanvasElement,
-        window: any
+        window: any,
+        end: Function
     ) {
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
@@ -28,6 +30,7 @@ export default class Game {
         this.window = window;
         this.score = 0;
         this.fps = 1000 / 60;
+        this.end = end;
 
         this.configCanvas();
         this.configPlayers();
@@ -87,7 +90,7 @@ export default class Game {
         this.player.increaseSize();
     }
 
-    addFriend(friendsAdded: number[]) {
+    addFriend() {
         this.circles.push(
             new Friend(
                 this.screenWidth * Math.random(),
@@ -103,12 +106,12 @@ export default class Game {
 
     turn() {
         let nTurn = 0;
-        let friendsAdded: number[] = [];
+
         setInterval(() => {
             nTurn++;
             this.increaseDificulty();
 
-            if (nTurn % 5 === 0) this.addFriend(friendsAdded);
+            if (nTurn % 5 === 0) this.addFriend();
         }, 2000);
     }
 
@@ -117,8 +120,8 @@ export default class Game {
         this.clearScreen();
         clearInterval(this.intervalId);
         this.circles = [];
-
-        this.window.location.reload();
+        this.end();
+        // this.window.location.reload();
     }
 
     gameLoop() {
