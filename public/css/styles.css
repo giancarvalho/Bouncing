@@ -9,6 +9,18 @@ body {
     cursor: none;
 }
 
+@keyframes moveToRight {
+    0% {
+        opacity: 1;
+        left: 50%;
+    }
+
+    100% {
+        opacity: 0;
+        left: 80%;
+    }
+}
+
 #modal {
     width: 50%;
     height: 500px;
@@ -23,6 +35,14 @@ body {
     transform: translate(-50%, -50%);
     border-radius: 8px;
     border: 2px solid rgb(68, 67, 67);
+    transition: visibility 0s, opacity 0.3s linear;
+}
+
+#modal.hidden {
+    animation: moveToRight 250ms ease-out;
+    visibility: 0;
+    opacity: 0;
+    left: 110%;
 }
 
 #modal h1 {
@@ -47,8 +67,4 @@ body {
 
 #modal button:hover {
     filter: brightness(1.25);
-}
-
-#modal.hidden {
-    display: none;
 }
