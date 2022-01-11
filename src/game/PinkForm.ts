@@ -1,7 +1,7 @@
 import Circle from "./Circle";
-import iBall from "./interfaces/Ball";
+import iBall from "../interfaces/Ball";
 
-export default class PinkShape extends Circle {
+export default class PinkForm extends Circle {
     vunerability: false;
 
     constructor(ballData: iBall) {

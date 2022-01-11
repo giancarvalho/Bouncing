@@ -106,12 +106,16 @@ export default class Game {
 
     turn() {
         let nTurn = 0;
+        let friendsAdded = 1;
 
         setInterval(() => {
             nTurn++;
             this.increaseDificulty();
 
-            if (nTurn % 5 === 0) this.addFriend();
+            if (nTurn % (5 * friendsAdded) === 0) {
+                this.addFriend();
+                friendsAdded++;
+            }
         }, 2000);
     }
 
@@ -121,7 +125,6 @@ export default class Game {
         clearInterval(this.intervalId);
         this.circles = [];
         this.end();
-        // this.window.location.reload();
     }
 
     gameLoop() {

@@ -1,5 +1,5 @@
 import Game from "./Game";
-import iBall from "./interfaces/Ball";
+import iBall from "../interfaces/Ball";
 import { v4 as idGenerator } from "uuid";
 
 export default abstract class Circle {

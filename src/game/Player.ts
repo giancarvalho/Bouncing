@@ -1,5 +1,5 @@
 import Circle from "./Circle";
-import RedShape from "./RedShape";
+import RedForm from "./RedForm";
 
 export default class Player {
     isVunerable: boolean;
@@ -8,7 +8,7 @@ export default class Player {
     radius: number;
     color: string;
     context: any;
-    shape: any;
+    form: any;
 
     constructor(x: number, y: number, radius = 100, context: any) {
         this.x = x;
@@ -17,7 +17,7 @@ export default class Player {
         this.color = "red";
         this.context = context;
         this.isVunerable = true;
-        this.shape = new RedShape({
+        this.form = new RedForm({
             x: this.x,
             y: this.y,
             radius: this.radius,
@@ -31,8 +31,8 @@ export default class Player {
         this.y = event.clientY;
     }
 
-    changeShape(Shape: any) {
-        this.shape = new Shape({
+    changeForm(form: any) {
+        this.form = new form({
             x: this.x,
             y: this.y,
             radius: this.radius,
@@ -40,15 +40,15 @@ export default class Player {
             color: this.color,
         });
 
-        this.isVunerable = this.shape.vunerability;
+        this.isVunerable = this.form.vunerability;
     }
 
     returnToNormal() {
-        this.changeShape(RedShape);
+        this.changeForm(RedForm);
     }
 
     updateState() {
-        this.shape.draw(this.x, this.y);
+        this.form.draw(this.x, this.y);
     }
 
     gainInvunerability() {
@@ -56,12 +56,12 @@ export default class Player {
     }
 
     increaseSize() {
-        this.radius += 1;
-        this.shape.radius += 1;
+        this.radius += 2;
+        this.form.radius += 2;
     }
 
     decreaseSize() {
         this.radius -= 1;
-        this.shape.radius -= 1;
+        this.form.radius -= 1;
     }
 }

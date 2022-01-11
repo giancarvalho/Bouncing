@@ -1,7 +1,7 @@
 import Circle from "./Circle";
-import iBall from "./interfaces/Ball";
+import iBall from "../interfaces/Ball";
 
-export default class RedShape extends Circle {
+export default class RedForm extends Circle {
     vunerability: true;
 
     constructor(ballData: iBall) {

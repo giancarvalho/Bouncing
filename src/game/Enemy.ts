@@ -1,6 +1,6 @@
 import BouncingBall from "./BouncingBall";
 import Game from "./Game";
-import Ball from "./interfaces/Ball";
+import Ball from "../interfaces/Ball";
 import Player from "./Player";
 
 export default class Enemy extends BouncingBall {

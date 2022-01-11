@@ -1,4 +1,4 @@
-import Game from "./Game";
+import Game from "./game/Game";
 
 const canvas: HTMLCanvasElement = document.querySelector("#canvas");
 const modal = document.querySelector("#modal");
@@ -12,13 +12,13 @@ canvas.addEventListener("mousemove", (event) => {
     game.moveMouse(event);
 });
 
-function end() {
-    game = new Game(screenWidth, screenHeight, canvas, window, end);
+function start() {
+    game.start();
     toggleModal();
 }
 
-function start() {
-    game.start();
+function end() {
+    game = new Game(screenWidth, screenHeight, canvas, window, end);
     toggleModal();
 }
 
