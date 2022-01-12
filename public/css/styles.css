@@ -1,0 +1,146 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto&display=swap");
+
+body {
+    background-color: rgb(0, 0, 0);
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+}
+
+#canvas {
+    cursor: none;
+}
+
+@keyframes moveToRight {
+    0% {
+        cursor: wait;
+        opacity: 1;
+        left: 50%;
+    }
+
+    100% {
+        opacity: 0;
+        left: 80%;
+    }
+}
+
+#modal {
+    max-width: 600px;
+    width: 80%;
+    height: 500px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(27, 26, 26);
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 8px;
+    border: 2px solid rgb(68, 67, 67);
+    transition: visibility 0s, opacity 0.3s linear;
+}
+
+#modal.hidden {
+    animation: moveToRight 250ms ease-out;
+    visibility: 0;
+    opacity: 0;
+    left: 110%;
+}
+
+#modal h1,
+#modal h2 {
+    font-family: "Press Start 2P", cursive;
+    color: #fff;
+    text-shadow: rgb(182, 181, 181) 2px 5px;
+}
+
+h1 {
+    font-size: 53px;
+}
+
+h2 {
+    font-size: 35px;
+}
+
+#modal button {
+    width: 200px;
+    height: 60px;
+    font-weight: bold;
+    font-size: 25px;
+    background-color: rgb(218, 14, 14);
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px 1px rgba(255, 255, 255, 0.678);
+    cursor: pointer;
+}
+
+#modal button:hover {
+    filter: brightness(1.25);
+}
+
+ul {
+    width: 80%;
+    height: 300px;
+    overflow-y: scroll;
+    background-color: rgb(68, 67, 67);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+
+    padding-top: 10px;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+li {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    color: #fff;
+    height: 20px;
+    padding: 7px 0;
+}
+
+ul > li:first-child {
+    font-size: 22px;
+    font-weight: bold;
+    background-color: transparent;
+}
+
+li:nth-child(even) {
+    background-color: rgb(98, 97, 97);
+}
+
+li > span {
+    display: inline-block;
+    width: 100%;
+}
+
+.last {
+    border: 2px solid rgb(218, 14, 14);
+    position: relative;
+}
+
+.last:before {
+    content: "New!";
+    position: absolute;
+    left: 5px;
+    font-size: 10px;
+    color: rgb(223, 219, 219);
+    font-weight: bold;
+}
+
+.score {
+    font-weight: bold;
+    text-align: center;
+}
+
+.date {
+    font-size: 15px;
+    text-align: start;
+    margin-left: 10px;
+}
