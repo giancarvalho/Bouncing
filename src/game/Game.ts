@@ -124,7 +124,7 @@ export default class Game {
     }
 
     endGame() {
-        this.savedScore.push({ score: this.score, date: new Date() });
+        this.savedScore.push({ score: this.score, date: Date.now() });
         clearInterval(this.intervalId);
         this.circles = [];
         setTimeout(() => {

@@ -16,7 +16,7 @@ export default function ReplayScreen(scoreHistory: iScore[]) {
         scores.forEach((scoreData) => {
             historyList += `<li>
             <span class="score"> ${scoreData.score} </span>
-            <span class="date">${dayjs(lastRecord.date).format("LLL")}</span>
+            <span class="date">${dayjs(scoreData.date).format("LLL")}</span>
             </li>`;
         });
 
