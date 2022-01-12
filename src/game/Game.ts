@@ -2,6 +2,7 @@ import Circle from "./Circle";
 import Enemy from "./Enemy";
 import Friend from "./Friend";
 import Player from "./Player";
+import iScore from "../interfaces/Score";
 
 export default class Game {
     screenWidth: any;
@@ -16,21 +17,24 @@ export default class Game {
     fps: number;
     intervalId: any;
     score: number;
+    savedScore: iScore[];
 
-    constructor(
-        screenWidth: any,
-        screenHeight: any,
-        canvas: HTMLCanvasElement,
-        window: any,
-        end: Function
-    ) {
-        this.screenWidth = screenWidth;
-        this.screenHeight = screenHeight;
-        this.canvas = canvas;
-        this.window = window;
+    constructor(browser: {
+        screenWidth: any;
+        screenHeight: any;
+        canvas: HTMLCanvasElement;
+        window: any;
+        end: Function;
+        savedScore: iScore[];
+    }) {
+        this.screenWidth = browser.screenWidth;
+        this.screenHeight = browser.screenHeight;
+        this.canvas = browser.canvas;
+        this.window = browser.window;
+        this.savedScore = browser.savedScore;
         this.score = 0;
         this.fps = 1000 / 60;
-        this.end = end;
+        this.end = browser.end;
 
         this.configCanvas();
         this.configPlayers();
@@ -120,7 +124,7 @@ export default class Game {
     }
 
     endGame() {
-        alert(`Voce fez ${this.score} pontos`);
+        this.savedScore.push({ score: this.score, date: new Date() });
         this.clearScreen();
         clearInterval(this.intervalId);
         this.circles = [];
