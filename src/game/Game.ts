@@ -49,8 +49,8 @@ export default class Game {
         );
         this.circles = [
             new Enemy(0, 0, 10, "green", 15, 15, this.context),
-            new Enemy(10, 10, 10, "green", 5, 5, this.context),
-            new Enemy(20, 20, 10, "green", 10, 10, this.context),
+            new Enemy(600, 0, 10, "green", 15, 15, this.context),
+            new Enemy(200, 200, 10, "green", 15, 15, this.context),
         ];
     }
 
@@ -86,8 +86,8 @@ export default class Game {
                 0,
                 10,
                 "green",
-                13 * Math.random(),
-                13 * Math.random(),
+                17 * Math.random(),
+                17 * Math.random(),
                 this.context
             )
         );

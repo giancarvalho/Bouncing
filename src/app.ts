@@ -39,15 +39,15 @@ function start() {
 
 function end() {
     game = new Game(browser);
-    LocalStorage.saveScoreHistory(savedScore);
     modal.innerHTML = ReplayScreen(savedScore);
+    LocalStorage.saveScoreHistory(savedScore);
     addStartToButton();
     toggleModal();
 }
 
 function firstRun() {
     console.log;
-    modal.innerHTML = ReplayScreen(savedScore);
+    modal.innerHTML = StartScreen();
     addStartToButton();
 }
 

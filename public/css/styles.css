@@ -12,6 +12,7 @@ body {
 
 @keyframes moveToRight {
     0% {
+        cursor: wait;
         opacity: 1;
         left: 50%;
     }
@@ -23,7 +24,8 @@ body {
 }
 
 #modal {
-    width: 50%;
+    max-width: 600px;
+    width: 80%;
     height: 500px;
     display: flex;
     justify-content: space-around;
