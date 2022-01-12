@@ -2,11 +2,14 @@ import Game from "./game/Game";
 import iScore from "./interfaces/Score";
 import StartScreen from "./components/StartScreen";
 import ReplayScreen from "./components/ReplayScreen";
+import LocalStorage from "./utils/LocalStorage";
+
 const canvas: HTMLCanvasElement = document.querySelector("#canvas");
 const modal = document.querySelector("#modal");
 const screenWidth = window.innerWidth;
 const screenHeight = window.innerHeight;
-const savedScore: iScore[] = [];
+const savedScore: iScore[] = LocalStorage.getScoreHistory();
+
 const browser = {
     screenWidth,
     screenHeight,
@@ -20,18 +23,6 @@ canvas.addEventListener("mousemove", (event) => {
     game.moveMouse(event);
 });
 
-function start() {
-    game.start();
-    toggleModal();
-}
-
-function end() {
-    game = new Game(browser);
-    modal.innerHTML = ReplayScreen(savedScore);
-    addStartToButton();
-    toggleModal();
-}
-
 function toggleModal() {
     modal.classList.toggle("hidden");
 }
@@ -41,8 +32,22 @@ function addStartToButton() {
     startButton.addEventListener("click", start, false);
 }
 
+function start() {
+    game.start();
+    toggleModal();
+}
+
+function end() {
+    game = new Game(browser);
+    LocalStorage.saveScoreHistory(savedScore);
+    modal.innerHTML = ReplayScreen(savedScore);
+    addStartToButton();
+    toggleModal();
+}
+
 function firstRun() {
-    modal.innerHTML = StartScreen();
+    console.log;
+    modal.innerHTML = ReplayScreen(savedScore);
     addStartToButton();
 }
 
