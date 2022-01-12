@@ -1,31 +1,23 @@
 import iScore from "../interfaces/Score";
 import * as dayjs from "dayjs";
+import * as localizedFormat from "dayjs/plugin/localizedFormat";
 
 export default function ReplayScreen(scoreHistory: iScore[]) {
-    const scores = [
-        { score: 150, date: new Date() },
-        { score: 150, date: new Date() },
-        { score: 150, date: new Date() },
-        { score: 150, date: new Date() },
-        { score: 150, date: new Date() },
-        { score: 150, date: new Date() },
-        { score: 150, date: new Date() },
-        { score: 150, date: new Date() },
-        { score: 150, date: new Date() },
-        { score: 150, date: new Date() },
-        { score: 150, date: new Date() },
-        { score: 150, date: new Date() },
-    ];
-    const lastRecord = scores[scores.length - 1];
+    dayjs.extend(localizedFormat);
+    const scores = [...scoreHistory];
+
+    const lastRecord = scores.splice(scores.length - 1, 1)[0];
+
+    scores.sort((a, b) => b.score - a.score);
+
     function createHistory() {
         let historyList = "";
 
         scores.forEach((scoreData) => {
-            historyList += `<li><span class="score"> ${scoreData.score} </span>
-            
-            <span>${dayjs(scoreData.date).format(
-                "DD/MM/YY HH:mm"
-            )}</span> </li>`;
+            historyList += `<li>
+            <span class="score"> ${scoreData.score} </span>
+            <span class="date">${dayjs(lastRecord.date).format("LLL")}</span>
+            </li>`;
         });
 
         return historyList;
@@ -34,8 +26,10 @@ export default function ReplayScreen(scoreHistory: iScore[]) {
     return `<h2>Best Scores</h2>
     <ul>
     <li>Score / Date</li>
-    <li class="last"><span class="score"> ${lastRecord.score} </span>
-     <span>${dayjs(lastRecord.date).format("DD/MM/YY HH:mm")}</span> </li>
+    <li class="last">
+    <span class="score"> ${lastRecord.score} </span>
+     <span class="date">${dayjs(lastRecord.date).format("LLL")}</span> 
+    </li>
     ${createHistory()}
     </ul>
     <button>Restart</button>

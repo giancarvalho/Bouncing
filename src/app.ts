@@ -28,6 +28,7 @@ function start() {
 function end() {
     game = new Game(browser);
     modal.innerHTML = ReplayScreen(savedScore);
+    addStartToButton();
     toggleModal();
 }
 
@@ -35,10 +36,14 @@ function toggleModal() {
     modal.classList.toggle("hidden");
 }
 
-function firstRun() {
-    modal.innerHTML = ReplayScreen(savedScore);
+function addStartToButton() {
     const startButton = document.querySelector("button");
     startButton.addEventListener("click", start, false);
+}
+
+function firstRun() {
+    modal.innerHTML = StartScreen();
+    addStartToButton();
 }
 
 let game = new Game(browser);

@@ -125,10 +125,12 @@ export default class Game {
 
     endGame() {
         this.savedScore.push({ score: this.score, date: new Date() });
-        this.clearScreen();
         clearInterval(this.intervalId);
         this.circles = [];
-        this.end();
+        setTimeout(() => {
+            this.clearScreen();
+            this.end();
+        }, 500);
     }
 
     gameLoop() {
