@@ -11,6 +11,7 @@ export default class Game {
     player: Player;
     circles: Circle[];
     end: Function;
+    isEnemiesOn: boolean;
 
     context: CanvasRenderingContext2D;
     window: any;
@@ -35,6 +36,7 @@ export default class Game {
         this.score = 0;
         this.fps = 1000 / 60;
         this.end = browser.end;
+        this.isEnemiesOn = false;
 
         this.configCanvas();
         this.configPlayers();
@@ -47,10 +49,11 @@ export default class Game {
             20,
             this.context
         );
+
         this.circles = [
-            new Enemy(0, 0, 10, "green", 15, 15, this.context),
-            new Enemy(600, 0, 10, "green", 15, 15, this.context),
             new Enemy(200, 200, 10, "green", 15, 15, this.context),
+            new Enemy(600, 0, 10, "green", 15, 15, this.context),
+            new Enemy(0, 0, 10, "green", 15, 15, this.context),
         ];
     }
 
@@ -68,18 +71,11 @@ export default class Game {
         this.player.move(event);
     }
 
-    update() {
-        this.circles.map((circle) => {
-            circle.updateState(this.screenWidth, this.screenHeight, this);
-        });
-    }
-
     deleteCircle(id: string) {
         this.circles = this.circles.filter((circle) => circle.id !== id);
     }
 
     increaseDificulty() {
-        this.score += 10;
         this.circles.push(
             new Enemy(
                 this.screenWidth * Math.random(),
@@ -114,6 +110,7 @@ export default class Game {
 
         setInterval(() => {
             nTurn++;
+            this.score += 10;
             this.increaseDificulty();
 
             if (nTurn % (5 * friendsAdded) === 0) {
@@ -133,16 +130,29 @@ export default class Game {
         }, 500);
     }
 
+    update() {
+        this.circles.map((circle) => {
+            circle.updateState(this.screenWidth, this.screenHeight, this);
+        });
+    }
+
     gameLoop() {
         this.clearScreen();
         this.player.updateState();
-        this.update();
+
+        if (this.isEnemiesOn) {
+            this.update();
+        }
     }
 
     start() {
         this.intervalId = setInterval(() => {
             this.gameLoop();
         }, this.fps);
-        this.turn();
+
+        setTimeout(() => {
+            this.isEnemiesOn = true;
+            this.turn();
+        }, 2500);
     }
 }

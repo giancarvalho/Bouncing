@@ -46,7 +46,6 @@ function end() {
 }
 
 function firstRun() {
-    console.log;
     modal.innerHTML = StartScreen();
     addStartToButton();
 }
