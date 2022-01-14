@@ -10,7 +10,7 @@ This game was made using TypeScript, HTML and CSS and designed using Object-Orie
 
 
 
-## How to run locallly
+## How to run locally
 
 In order to run this project, you need to have git and npm installed. Once you have the requirements, follow the steps:
 
