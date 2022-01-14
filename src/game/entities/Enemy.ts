@@ -1,8 +1,7 @@
-import iBouncingBall from "./BouncingBall";
-import Game from "./Game";
-import PinkForm from "./PinkForm";
+import Game from "../Game";
+import BouncingBall from "../protocols/BouncingBall";
 
-export default class Friend extends iBouncingBall {
+export default class Enemy extends BouncingBall {
     constructor(
         x: number,
         y: number,
@@ -12,15 +11,15 @@ export default class Friend extends iBouncingBall {
         speedY: number,
         context: any
     ) {
-        super({ x, y, radius, color, speedX, speedY, context });
-        this.x = x;
-        this.y = y;
-        this.radius = radius;
-        this.color = color;
+        super({ x, y, radius, color, context, speedY, speedX });
         this.speedX = speedX;
         this.speedY = speedY;
-        this.context = context;
     }
+
+    draw() {
+        this.drawCircle(this.x, this.y, this.radius, this.color);
+    }
+
     updateState(screenWidth: any, screenHeight: any, game: Game) {
         this.x += this.speedX;
         this.y += this.speedY;
@@ -30,21 +29,17 @@ export default class Friend extends iBouncingBall {
         this.checkColision(game);
     }
 
-    draw() {
-        this.drawCircle(this.x, this.y, this.radius, this.color);
-    }
-
     checkColision(game: Game) {
         const dist = Math.sqrt(
             (game.player.x - this.x) ** 2 + (game.player.y - this.y) ** 2
         );
 
         if (dist <= game.player.radius + this.radius) {
-            game.player.changeForm(PinkForm);
-            game.deleteCircle(this.id);
-            setTimeout(() => {
-                game.player.returnToNormal();
-            }, 3000);
+            if (game.player.isVunerable) game.endGame();
+            else {
+                game.deleteCircle(this.id);
+                game.player.decreaseSize();
+            }
         }
     }
 }

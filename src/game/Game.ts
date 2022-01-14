@@ -1,8 +1,8 @@
-import Circle from "./Circle";
-import Enemy from "./Enemy";
-import Friend from "./Friend";
-import Player from "./Player";
-import iScore from "../interfaces/Score";
+import Circle from "./protocols/Circle";
+import Player from "./entities/Player";
+import iScore from "../protocols/Score";
+import Friend from "./entities/Friend";
+import Enemy from "./entities/Enemy";
 
 export default class Game {
     screenWidth: any;
