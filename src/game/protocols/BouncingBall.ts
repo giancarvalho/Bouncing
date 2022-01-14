@@ -1,6 +1,6 @@
 import Circle from "./Circle";
-import Game from "./Game";
-import iBall from "../interfaces/Ball";
+import iBall from "../../protocols/Ball";
+import Game from "../Game";
 
 interface iBouncingBall extends iBall {
     speedX: number;

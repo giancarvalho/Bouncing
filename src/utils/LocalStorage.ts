@@ -1,4 +1,4 @@
-import iScore from "../interfaces/Score";
+import iScore from "../protocols/Score";
 
 export default class LocalStorage {
     static saveScoreHistory(history: iScore[]) {

@@ -1,4 +1,4 @@
-import iScore from "../interfaces/Score";
+import iScore from "../protocols/Score";
 import * as dayjs from "dayjs";
 import * as localizedFormat from "dayjs/plugin/localizedFormat";
 

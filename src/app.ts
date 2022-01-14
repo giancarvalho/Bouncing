@@ -1,5 +1,5 @@
 import Game from "./game/Game";
-import iScore from "./interfaces/Score";
+import iScore from "./protocols/Score";
 import StartScreen from "./components/StartScreen";
 import ReplayScreen from "./components/ReplayScreen";
 import LocalStorage from "./utils/LocalStorage";

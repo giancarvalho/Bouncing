@@ -1,5 +1,5 @@
-import Circle from "./Circle";
-import iBall from "../interfaces/Ball";
+import Circle from "../protocols/Circle";
+import iBall from "../../protocols/Ball";
 
 export default class RedForm extends Circle {
     vunerability: true;

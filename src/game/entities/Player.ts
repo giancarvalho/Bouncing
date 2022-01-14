@@ -1,4 +1,4 @@
-import Circle from "./Circle";
+import Circle from "../protocols/Circle";
 import RedForm from "./RedForm";
 
 export default class Player {
